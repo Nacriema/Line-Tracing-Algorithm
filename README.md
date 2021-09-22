@@ -47,6 +47,25 @@ with blue color and red color respectively.
 
 * In the author's result, you can see the affect of applying the **Searching Direction Constrain**, compared with my result. 
 
+## Update Result 22/09
+
+Added the **Searching Direction Constrain**. Comparing my result with the author's result. 
+
+| Original Image      | My result - detected line | My result - curve refined line (output)| Author's result|
+| ----------- | ----------- |------|------|
+| ![](Images/Im_1.jpeg)|![](Images/im_1_line_detect.jpg)|![](Images/im_1_line_detect_use_curve_fit.jpg)|![](Images/author_result_1.png)|
+| ![](Images/im_7.jpg)| ![](Images/im_7_line_detect.jpg)|![](Images/im_7_line_detect_use_curve_fit.jpg)|![](Images/author_result_2.png)|
+| ![](Images/im_7.jpg)| ![](Images/im_7_line_detect__.jpg)|![](Images/im_7_line_detect_use_curve_fit__.jpg)|![](Images/author_result_2.png)|
+
+Finally, I understand the concept of the proposed **Line Tracing Algorithm**
+
+
+
+
 ## TODO:
-- [ ] Implement the **Searching Direction Constrain** and compare my result with the author's result.  
+- [x] Implement the **Searching Direction Constrain** and compare my result with the author's result.  
+- [ ] Refactor the line_tracing function to more flexible when change the gradient directions, this can be done when I
+define the array contains directions unit w.r.t each direction and choose them by their index. Ok, I'll implement it
+tomorrow. 
+- [ ] Apply more gradients orient and track lines on my sample data.
 - [ ] Refine the code.

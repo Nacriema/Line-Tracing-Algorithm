@@ -60,12 +60,10 @@ Added the **Searching Direction Constrain**. Comparing my result with the author
 Finally, I understand the concept of the proposed **Line Tracing Algorithm**
 
 
-
-
 ## TODO:
 - [x] Implement the **Searching Direction Constrain** and compare my result with the author's result.  
-- [ ] Refactor the line_tracing function to more flexible when change the gradient directions, this can be done when I
+- [x] Refactor the line_tracing function to more flexible when change the gradient directions, this can be done when I
 define the array contains directions unit w.r.t each direction and choose them by their index. Ok, I'll implement it
 tomorrow. 
 - [ ] Apply more gradients orient and track lines on my sample data.
-- [ ] Refine the code.
+- [x] Refine the code.

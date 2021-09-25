@@ -61,11 +61,12 @@ import numpy as np
 import scipy.ndimage as ndi
 import matplotlib.pyplot as plt
 from skimage import img_as_float
-from skimage.io import imread, imsave
+from skimage.io import imread
 from skimage.color import rgb2gray
 from math import ceil
 from PIL import Image
 from scipy.optimize import curve_fit
+import math
 
 
 def imshow_all(*images, titles=None, cmap=None, ncols=3):
@@ -227,22 +228,13 @@ def choose_interest_point_by_slope(init_h, init_w, curr_h, curr_w, init_set, k0=
     :param k0:
     :return:
     """
-    # Special case: Handle the special cases, may be we don't care too much about them
-    if curr_h - init_h == 0:
-        min_index = 0
-    elif curr_h - 1 - init_h == 0:
-        min_index = 1
-    elif curr_h + 1 - init_h == 0:
-        min_index = 2
-    else:
-        # TODO: Adjust here
-        slope_0 = (curr_h - init_h)/(curr_w + 1 - init_w)
-        slope_45 = (curr_h - 1 - init_h)/(curr_w + 1 - init_w)
-        slope_neg_45 = (curr_h + 1 - init_h)/(curr_w + 1 - init_w)
-        # TODO: Here is also can modify base on condition
-        watch_list_slopes = [abs(slope_0 - k0), abs(slope_45-k0), abs(slope_neg_45-k0)]
-        # watch_list_slopes = [slope_0 - k0, slope_45-k0, slope_neg_45-k0]
-        min_index = watch_list_slopes.index(min(watch_list_slopes))
+    # Refactor code
+    slope_0 = (curr_h - init_h) / (curr_w + 1 - init_w) if (curr_w + 1 - init_w) != 0 else math.inf
+    slope_45 = (curr_h - 1 - init_h) / (curr_w + 1 - init_w) if (curr_w + 1 - init_w) != 0 else math.inf
+    slope_neg_45 = (curr_h - 1 - init_h) / (curr_w - init_w) if (curr_w - init_w) != 0 else math.inf
+    # TODO: Here is also can modify base on condition
+    watch_list_slopes = [abs(slope_0 - k0), abs(slope_45 - k0), abs(slope_neg_45 - k0)]
+    min_index = watch_list_slopes.index(min(watch_list_slopes))
     if min_index == 0:
         init_set.append((curr_h, curr_w + 1))
     elif min_index == 1:
@@ -361,7 +353,7 @@ if __name__ == '__main__':
     # init_point = (260, 258)
     # im_7 (50, 191) and (206, 216) and (61, 192)
     image_rgb = imread('./Images/im_7.jpg')
-    init_point = (61, 192)
+    init_point = (206, 216)
     # print(image_rgb[74, 315])
     image = rgb2gray(image_rgb)
     # print(image.shape)
